@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,9 +9,14 @@ namespace EmployeeManagement.Models
     public class Employee
     {
         public int Id { get; set; }
+        [Required]
+        [MaxLength(50 , ErrorMessage ="Name can not exceed 50 characters!")]
         public string Name { get; set; }
+        [Required]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Invalid Email Address!")]
         public string Email { get; set; }
-        public string Department { get; set; }
+        [Required]
+        public Dept? Department { get; set; }
 
     }
 }

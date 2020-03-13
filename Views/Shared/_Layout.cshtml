@@ -3,16 +3,65 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <environment include="Development">
+        <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only"
+              asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"
+              asp-suppress-fallback-integrity="true">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                asp-suppress-fallback-integrity="true">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery"
+                asp-suppress-fallback-integrity="true">
+        </script>
+
+       
+    </environment>
+    
     <link href="~/css/CustomStyles.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="container">
-        @RenderBody()
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand" >
+                <img  src="~/images/Logo.png" asp-append-version="true" height="30" width="30" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="navbar-item">
+                        <a asp-action="Index" asp-controller="Home" class="nav-link">List</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a asp-action="Create" asp-controller="Home" class="nav-link">Create</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div>
+            @RenderBody()
+        </div>
     </div>
-    @if(IsSectionDefined("Scripts"))
-    { 
+    @if (IsSectionDefined("Scripts"))
+    {
         @RenderSection("Scripts")
     }
 </body>
